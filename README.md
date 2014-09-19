@@ -168,7 +168,9 @@ See the full example int the `examples/calculator` folder.
 FAQ
 ---
 
-**Where is the Python 2.X compatible version?**
+
+### Where is the Python 2.X compatible version? ###
+
 Support for python 2.x series **cannot** be provided as the library heavily
 relies on function annotation, which has been introduced in python 3.0 as well
 as from the `yield from` syntax introduced in v 3.3.
