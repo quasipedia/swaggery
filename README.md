@@ -2,7 +2,10 @@ Swaggery
 ========
 
 A python3 framework to code self-documenting RESTful API's according to the
-[swagger 2.0](https://swagger.io) specifications.
+[swagger](https://swagger.io) specifications.
+
+The project currently support swagger specifications 1.2, migration to version
+2.0 is underway.
 
 At present, serving the **application via uWSGI is a requirement** as this is
 presently the only WSGI server to provide support for the `yeld from` syntax.
