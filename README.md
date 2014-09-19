@@ -7,7 +7,7 @@ A python3 framework to code self-documenting RESTful API's according to the
 The project currently support swagger specifications 1.2, migration to version
 2.0 is underway.
 
-At present, serving the **application via uWSGI is a requirement** as this is
+Serving the application via uWSGI is a **temporary requirement** as this is
 presently the only WSGI server to provide support for the `yeld from` syntax.
 
 As soon as [native support for `asyncio` will become stable]
@@ -15,6 +15,34 @@ As soon as [native support for `asyncio` will become stable]
 refactored to use that (hopefully universal, and thus supported by other WSGI
 servers) mechanism.
 
+
+
+Design principles
+-----------------
+
+  - **Lightweight** - Swaggery is not built on top of web application
+    frameworks designed to serve websites.  It is built ground-up for serving
+    swagger APIs.  The only core dependency is [werkzeug]
+    (http://werkzeug.pocoo.org/).
+  - **Consistent** - Swaggery has born from the observation that in large
+    corporate environments (but in poorly managed small projects too!) APIs
+    tend to become inconsistent over time: as various endpoints are implemented
+    by various people, the naming conventions, data containers and/or types
+    multiply, making the API more difficult to use and buggy than it ought to
+    be.  Swaggery tries to mitigate this phenomenon by using classes with a
+    well defined interface that self-document themselves in a consistent
+    manner.
+  - **Concurrent** - Swaggery has been designed from day #1 to be concurrent.
+    Concurrency is not an afterthought achieved with a hack, it has been the
+    first stone to be laid down at the beginning of the project.
+  - **Modern** - The upside of Swaggery being a new project that doesn't build
+    onto large, multi-purpose frameworks (read: flask, django, etc...) is that
+    it was possible to use modern python to build it.  In particular,
+    Swaggery heavily relies on the `yeld from syntax` introduced in Python 3.3
+    and function annotations, introduced in Python 3.0.  As soon as this will
+    be supported by at least one of the major WSGI servers, Swaggery will
+    be modified (read: simplified!) to run on the `asyncio` loop (introduced
+    in python 3.4).
 
 
 Quick Start
@@ -27,23 +55,6 @@ A template can be found at `/templates/swaggery.ini`.  After you have done,
 just type:
 
     uwsgi swaggery.ini
-
-
-
-Stuff that needs to be documented
----------------------------------
-
-  - Use sphinx
-  - Return mechanism (Fail vs. return)
-  - How testing is easy
-  - Only one callback for each HTTP (REST)
-  - Request is passed as a courtesy, but shouldn't be used for business logic
-  - Ptypes
-  - Streaming answers
-  - swaggery.ini file
-  - testlib
-  - Subpath
-  - Checker
 
 
 
@@ -65,13 +76,6 @@ at import time.
 Model classes have a single class attribute called "schema" which must conform
 to JSON schema syntax (see: [here](http://json-schema.org/) and
 [here](https://github.com/wordnik/swagger-core/wiki/datatypes)).
-
-#### Planned features: ####
-
-  - The schema provided is automatically used to validate data supplied in
-    the request.
-  - A specific command-line flag will allow to also check the result provided
-    by the API conforms to the schema.
 
 
 ### Api ###
@@ -165,6 +169,23 @@ Will be rendered as the following swagger description:
     }
 
 See the full example int the `examples/calculator` folder.
+
+
+
+Stuff that needs to be documented
+---------------------------------
+
+  - Use sphinx
+  - Return mechanism (Fail vs. return)
+  - How testing is easy
+  - Only one callback for each HTTP (REST)
+  - Request is passed as a courtesy, but shouldn't be used for business logic
+  - Ptypes
+  - Streaming answers
+  - swaggery.ini file
+  - testlib
+  - Subpath
+  - Checker
 
 
 
