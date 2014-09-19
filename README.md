@@ -27,36 +27,20 @@ just type:
 
 
 
-To Do & Limitations
--------------------
+Stuff that needs to be documented
+---------------------------------
 
-  - Important Features
-    - Automgically convert parameters based on their types
-    - Modify Headers to accept X if X is a header parameters in a callback
-  - Nice to have
-    - JSON schema validation of input
-    - Add extra validation as a type initialisation parameter
-    - Authorisation framework
-    - CORS enabled/disabled for development
-    - Checker from command line utility
-    - Implement "consume" and "generates" rather than the hardcode JSON
-      [NB: This requires both the parsing and the "Accept" header injection!]
-    - Optional validation of output schema [for development]
-    - "hidden" option for ceratain API (e.g.: introspect)
-    - Stream array of object vs stream bytes of a single object
-    - setup.py
-  - Documentation
-    - Use sphinx
-    - Return mechanism (Fail vs. return)
-    - How testing is easy
-    - Only one callback for each HTTP (REST)
-    - Request is passed as a courtesy, but shouldn't be used for business logic
-    - Ptypes
-    - Streaming answers
-    - swaggery.ini file
-    - testlib
-    - Subpath
-    - Checker
+  - Use sphinx
+  - Return mechanism (Fail vs. return)
+  - How testing is easy
+  - Only one callback for each HTTP (REST)
+  - Request is passed as a courtesy, but shouldn't be used for business logic
+  - Ptypes
+  - Streaming answers
+  - swaggery.ini file
+  - testlib
+  - Subpath
+  - Checker
 
 
 
