@@ -7,13 +7,16 @@ from os import path
 here = path.abspath(path.dirname(__file__))
 
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
-    long_description = f.read()
+    long_description = f.read().strip()
+
+with open(path.join(here, 'VERSION'), encoding='utf-8') as f:
+    version = f.read().strip()
 
 setup(
 
     # Authoring
     name='swaggery',
-    version='1.0.0a1',
+    version=version,
     description='A Python3 framework to create self-documenting swagger APIs',
     long_description=long_description,
     url='https://github.com/quasipedia/swaggery',
@@ -57,10 +60,17 @@ setup(
     },
 
     # Content
-    py_modules=['wsgi_application'],
     packages=find_packages(exclude=['contrib', 'docs', 'test']),
     package_data={
-        'swaggery': ['static/*', 'introspection/*.json'],
+        'swaggery': ['static/*', 'introspection/*.json', 'templates/*'],
     },
-
+    data_files=[
+        ('swaggery-examples/async', ['examples/async/async.py']),
+        ('swaggery-examples/calc', ['examples/calc/calc.py']),
+    ],
+    # entry_points={
+    #     'console_scripts': [
+    #         'swag = sample:main',
+    #     ],
+    # },
 )
