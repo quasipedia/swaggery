@@ -32,6 +32,7 @@ class Introspection(Api):
 
     version = '1.0.0'
     path = 'introspect'
+    private = True
 
 
 class ResourceListing(Resource):
@@ -46,10 +47,11 @@ class ResourceListing(Resource):
 
         Resources are filtered according to the permission system, so querying
         this resource as different users may bare different results.'''
+        apis = [api.get_swagger_fragment() for api in Api if not api.private]
         Respond(200, {
             'apiVersion': cls.api.version,
             'swaggerVersion': cls.api.swagger_version,
-            'apis': [api.get_swagger_fragment() for api in Api]
+            'apis': apis
         })
 
 
@@ -98,7 +100,7 @@ class ApiDeclaration(Resource):
         resources = tuple(filter(lambda ep: ep.api.path == api_path, Resource))
         if not resources:
             Respond(404)
-        apis = [ep.get_swagger_fragment() for ep in resources]
+        apis = [r.get_swagger_fragment() for r in resources if not r.private]
         cls.__cache[api_path] = {
             'apiVersion': cls.api.version,
             'swaggerVersion': cls.api.swagger_version,

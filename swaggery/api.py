@@ -46,6 +46,7 @@ class Api(object, metaclass=utils.RegisterLeafClasses):
     swagger_version = __SWAGGER_VERSION__
 
     __description = None
+    private = False
 
     @classmethod
     def get_swagger_fragment(cls):
@@ -78,6 +79,7 @@ class Resource(object, metaclass=utils.RegisterLeafClasses):
 
     api = None
     subpath = None
+    private = False
 
     __callbacks = None
     __description = None
