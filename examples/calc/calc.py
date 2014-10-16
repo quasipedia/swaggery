@@ -1,6 +1,5 @@
 '''A silly demo API to showcase Swaggery's capabilities.'''
 
-import json
 from math import sqrt
 
 from swaggery.keywords import *
