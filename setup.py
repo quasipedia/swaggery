@@ -51,6 +51,7 @@ setup(
         'dev': [
             'wheel==0.24.0',
             'pip==1.5.6',
+            'twine==1.3.1',
         ],
         'test': [
             'coverage==3.7.1',
@@ -67,6 +68,7 @@ setup(
     data_files=[
         ('swaggery-examples/async', ['examples/async/async.py']),
         ('swaggery-examples/calc', ['examples/calc/calc.py']),
+        ('swaggery-examples/vetinari', ['examples/vetinari/vetinari.py']),
     ],
     # entry_points={
     #     'console_scripts': [
