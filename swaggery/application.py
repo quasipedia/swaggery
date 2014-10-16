@@ -21,8 +21,8 @@ from .checker import main as check_and_load
 # the installed version of "swaggery"]
 from .introspection import introspection
 
-# Note that the following is the version of Swaggery, not of the APIs (to be set
-# in each API module) nor of the swagger specifications (set in "api.py)".
+# Note that the following is the version of Swaggery, not of the APIs (to be
+# set in each API module) nor of the swagger specifications (set in "api.py)".
 __VERSION__ = '1.0.0'
 
 
@@ -72,8 +72,11 @@ class Swaggery(object):
     def __call__(self, environ, start_response):
         request = Request(environ)
         url = request.url
+        method = request.method
+        # CORS pre-flight emit an OPTIONS request (at least on Swagger-UI, so
+        # we default an option request to Positive response)
         try:
-            log.debug('Attempting to dispatch {}'.format(url))
+            log.debug('Attempting to dispatch {} {}'.format(method, url))
             coroutine = self._get_coroutine(request, start_response)
             log.debug('Dispatching of {} SUCCEDED!'.format(url))
             yield from coroutine
