@@ -18,4 +18,5 @@ from .models import (
     Date,
     DateTime,
     List,
-    Set)
+    Set
+)
