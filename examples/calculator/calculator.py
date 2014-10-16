@@ -61,34 +61,34 @@ class TwoNumbers(Resource):
     '''Perform operations on two numbers.'''
 
     api = Calculator
-    subpath = 'op/<operator>/<first>/<second>'
+    subpath = 'op/<operation>/<first>/<second>'
 
     @operations('GET')
     def two_numbers(
             cls, request,
-            operator: (Ptypes.path,
-                       Operation('One of the 4 arithmetic operators.')),
+            operation: (Ptypes.path,
+                        Operation('One of the 4 arithmetic operations.')),
             first: (Ptypes.path,
                     Float('The first operand.')),
             second: (Ptypes.path,
                      Float('The second operand.'))) -> [
             (200, 'Ok', Float),
-            (400, 'Wrong number format or invalid operator'),
+            (400, 'Wrong number format or invalid operation'),
             (422, 'NaN')]:
         '''Any of the four arithmetic operation on two numbers.'''
-        log.info('Performing {} on {} and {}'.format(operator, first, second))
+        log.info('Performing {} on {} and {}'.format(operation, first, second))
         try:
             first = float(first)
             second = float(second)
         except ValueError:
             Respond(400)
-        if operator == 'add':
+        if operation == 'add':
             Respond(200, first + second)
-        elif operator == 'subtract':
+        elif operation == 'subtract':
             Respond(200, first - second)
-        elif operator == 'multiply':
+        elif operation == 'multiply':
             Respond(200, first * second)
-        elif operator == 'divide':
+        elif operation == 'divide':
             if second == 0:
                 Respond(422)
             Respond(200, first / second)
@@ -114,7 +114,7 @@ class AddVectors(Resource):
         log.info('Computing the length of vector {}'.format(vector))
         try:
             Respond(200, sqrt(vector['x'] ** 2 +
-                        vector['y'] ** 2 +
-                        vector.get('z', 0) ** 2))
+                              vector['y'] ** 2 +
+                              vector.get('z', 0) ** 2))
         except ValueError:
             Respond(400)
