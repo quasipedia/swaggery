@@ -3,4 +3,4 @@ rm -rf swaggery.egg-info
 rm -rf build
 rm -rf dist
 find -name '*.pyc' -print0 | xargs -0 rm
-rm -rf < find -name '__pycache__'
+find -name '__pycache__' | xargs rm -rf
