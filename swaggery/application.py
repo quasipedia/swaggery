@@ -21,10 +21,6 @@ from .checker import main as check_and_load
 # the installed version of "swaggery"]
 from .introspection import introspection
 
-# Note that the following is the version of Swaggery, not of the APIs (to be
-# set in each API module) nor of the swagger specifications (set in "api.py)".
-__VERSION__ = '1.0.0'
-
 
 class Swaggery(object):
 
