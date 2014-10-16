@@ -8,11 +8,12 @@ from .logger import log
 from .utils import jsonify
 
 
-HEADERS = [('Access-Control-Allow-Origin', '*'),
-           ('Accept', 'application/json'),
-           ('Access-Control-Allow-Headers',
-            'Content-Type, api_key, Authorization'),
-           ('Content-type', 'application/json')]
+HEADERS = [
+    ('Access-Control-Allow-Origin', '*'),
+    ('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT, PATCH, OPTIONS'),
+    ('Access-Control-Allow-Headers', 'Content-Type, api_key, Authorization'),
+    ('Content-Type', 'application/json; charset=utf-8'),
+]
 
 
 class AsyncResponse(Response):
