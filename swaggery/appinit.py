@@ -6,15 +6,13 @@ import configparser
 from swaggery.application import Swaggery
 from swaggery.logger import log
 
-BASE_DIR = os.path.dirname(__file__)
-SWAGGER_CONF = os.path.join(BASE_DIR, 'swaggery.ini')
-
 
 def init():
     '''Initialise a WSGI application to be loaded by uWSGI.'''
     # Load values from config file
+    config_file = os.path.realpath(os.path.join(os.getcwd(), 'swaggery.ini'))
     config = configparser.RawConfigParser(allow_no_value=True)
-    config.read(SWAGGER_CONF)
+    config.read(config_file)
     log_level = config.get('application', 'logging_level').upper()
     api_dirs = list(config['apis'])
     do_checks = config.get('application',
