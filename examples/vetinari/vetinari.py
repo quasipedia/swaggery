@@ -50,9 +50,9 @@ class Clock(Resource):
             style = cls._styles[style]
         except (ValueError, KeyError):
             Respond(400)
-        def venturi_clock():
+        def vetinari_clock():
             start = time()
             while time() - start <= length:
                 sleep(randint(25, 400) / 100)
                 yield strftime(style, localtime())
-        Respond(200, venturi_clock())
+        Respond(200, vetinari_clock())
