@@ -102,7 +102,7 @@ class Resource(object, metaclass=utils.RegisterLeafClasses):
                 'paramType': param_type,
                 'name': param_name,
                 'description': param_obj.description,
-                'dataType': param_obj.name,
+                'type': param_obj.name,
                 'required': sig_param.default is inspect.Parameter.empty,
             })
         return result

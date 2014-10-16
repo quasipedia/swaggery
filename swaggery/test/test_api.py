@@ -32,7 +32,7 @@ class TestResource(unittest.TestCase):
 
     def test_parse_signature(self):
         '''Parsing an endpoint signature bears [<swagger-dictionary>, ...].'''
-        keys = {'paramType', 'name', 'description', 'dataType', 'required'}
+        keys = {'paramType', 'name', 'description', 'type', 'required'}
         params = DummyResource.parse_signature(DummyResource.get_verb)
         self.assertEqual(1, len(params))
         self.assertTrue(keys.issubset(set(params[0].keys())))

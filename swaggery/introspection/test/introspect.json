@@ -31,7 +31,7 @@
                     "notes": "Resources are filtered according to the permission system, so querying this resource as different users may bare different results.", 
                     "parameters": [
                         {
-                            "dataType": "string", 
+                            "type": "string",
                             "description": "The path for the info on the resource.", 
                             "name": "api_path", 
                             "paramType": "path", 
@@ -153,7 +153,7 @@
                                                                 "name", 
                                                                 "paramType", 
                                                                 "required", 
-                                                                "dataType"
+                                                                "type"
                                                             ], 
                                                             "type": "object"
                                                         }, 

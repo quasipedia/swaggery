@@ -97,7 +97,7 @@
                                                     "name",
                                                     "paramType",
                                                     "required",
-                                                    "dataType"
+                                                    "type"
                                                 ],
                                                 "properties": {
                                                     "allowMultiple": {

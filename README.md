@@ -66,7 +66,7 @@ Swaggery APIs are created by subclassing 3 main "abstract" classes:
 ### Model ###
 
 Models define the data strcutures used by the API.  Since Swaggery is based on
-JSON-schema, the native datatypes are readily available in the `models.py`
+JSON-schema, the native data types are readily available in the `models.py`
 module (where the abstract `Model` class also lives).
 
 Models are referenced in the Endpoint method signatures, so they need to be
@@ -142,7 +142,7 @@ Will be rendered as the following swagger description:
                 "notes": "", 
                 "parameters": [
                     {
-                        "dataType": "Vector", 
+                        "type": "Vector",
                         "description": "The vector to analyse.", 
                         "name": "vector", 
                         "paramType": "body", 

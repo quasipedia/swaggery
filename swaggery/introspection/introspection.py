@@ -75,12 +75,19 @@ class ApiDeclaration(Resource):
             for op in api.get('operations', []):
                 models.add(op['type'])
                 for param in op.get('parameters', []):
-                    models.add(param.get('dataType', 'void'))
+                    models.add(param.get('type', 'void'))
                 for msg in op['responseMessages']:
                     models.add(msg.get('responseModel', 'void'))
         # Convert from swagger name representation to classes
         models = map(lambda m: Model.name_to_cls[m], models)
-        return [m.model for m in models if not m.native]
+        ret = {}
+        for model in models:
+            if model.native:
+                continue
+            obj = model.schema.copy()
+            obj['id'] = model.name
+            ret[model.name] = obj
+        return ret
 
     @operations('GET')
     def api_declaration(
