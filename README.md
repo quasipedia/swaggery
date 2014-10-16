@@ -35,6 +35,8 @@ Design principles
   - **Concurrent** - Swaggery has been designed from day #1 to be concurrent.
     Concurrency is not an afterthought achieved with a hack, it has been the
     first stone to be laid down at the beginning of the project.
+  - **Testable** - The uniform interface of Swaggery endpoints, that have no
+    side effects makes unit-testing very easy to do.
   - **Modern** - The upside of Swaggery being a new project that doesn't build
     onto large, multi-purpose frameworks (read: flask, django, etc...) is that
     it was possible to use modern python to build it.  In particular,
