@@ -82,7 +82,7 @@ class ApiDeclaration(Resource):
         models = map(lambda m: Model.name_to_cls[m], models)
         ret = {}
         for model in models:
-            if model.native:
+            if model.native_type:
                 continue
             obj = model.schema.copy()
             obj['id'] = model.name

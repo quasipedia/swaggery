@@ -86,7 +86,7 @@ class RegisterLeafModels(RegisterLeafClasses):
         cls.name_to_cls[cls.name] = cls
         # For native types we want to map both the Model class name and the
         # native name (e.g.: both "string" and "String")
-        if cls.native:
+        if cls.native_type:
             cls.name_to_cls[cls.__name__] = cls
         for base in bases:  # Remove base classes
             try:

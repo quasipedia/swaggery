@@ -18,23 +18,28 @@ class Model(object, metaclass=RegisterLeafModels):
     A Model class can either map a json-schema native data type (see: json-
     schema.org) or a custom one.
 
-    Native datatypes are all defined in Swaggery, so the final user will never have
-    to create new ones.
+    Native datatypes are all defined in Swaggery, so the final user will never
+    have to create new ones.
 
     Custom datatypes only need a class attribute (schema) defining their JSON
     schema.
     '''
 
-    native = False
     schema = None
+    native_type = False
 
-    def __init__(self, description):
+    def __init__(self, description, **kwargs):
         self._description = description
+        err_msg = 'Parameter "{}" invalid for type "{}"'
+        for pname in kwargs.keys():
+            if pname not in self._allowed_extra_params:
+                raise ValueError(err_msg.format(pname, self.name))
+        self.extra_params = kwargs
 
     @classproperty
     def name(cls):
         '''Return the name of the model as to be used in swagger.'''
-        return cls.native or cls.__name__
+        return cls.native_type or cls.__name__
 
     @classproperty
     def model(cls):
@@ -43,11 +48,14 @@ class Model(object, metaclass=RegisterLeafModels):
             raise RuntimeError('Trying to get the model for a native type.')
         return {cls.__name__: cls.schema}
 
-    @property
-    def description(self):
-        '''Return the textual description of the instance of the Model.'''
-        return self._description
-
+    def describe(self):
+        '''Provide a dictionary with information describing itself.'''
+        description = {
+            'description': self._description,
+            'type': self.name,
+        }
+        description.update(self.extra_params)
+        return description
 
 # ############################# #
 # NATIVE JSON-SCHEMA DATA TYPES #
@@ -58,49 +66,56 @@ class Void(Model):
 
     '''None objects.'''
 
-    native = 'void'
+    native_type = 'void'
+    _allowed_extra_params = ('defaultValue', 'format')
 
 
 class Integer(Model):
 
     '''Integer numbers.'''
 
-    native = 'integer'
+    native_type = 'integer'
+    _allowed_extra_params = ('defaultValue', 'format')
 
 
 class Float(Model):
 
     '''Floating point numbers.'''
 
-    native = 'float'
+    native_type = 'float'
+    _allowed_extra_params = ('defaultValue', 'format', 'minimum', 'maximum')
 
 
 class String(Model):
 
     '''Unicode strings.'''
 
-    native = 'string'
+    native_type = 'string'
+    _allowed_extra_params = ('defaultValue', 'format', 'enum')
 
 
 class Boolean(Model):
 
     '''Boolean.'''
 
-    native = 'boolean'
+    native_type = 'boolean'
+    _allowed_extra_params = ('defaultValue', 'format')
 
 
 class Date(Model):
 
     '''Dates.'''
 
-    native = 'date'
+    native_type = 'date'
+    _allowed_extra_params = ('defaultValue', 'format')
 
 
 class DateTime(Model):
 
     '''DateTimes.'''
 
-    native = 'date-time'
+    native_type = 'date-time'
+    _allowed_extra_params = ('defaultValue', 'format')
 
 
 # ############################# #

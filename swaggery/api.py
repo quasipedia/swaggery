@@ -98,13 +98,12 @@ class Resource(object, metaclass=utils.RegisterLeafClasses):
         result = []
         for param_name, (param_type, param_obj) in annotations.items():
             sig_param = function.signature.parameters[param_name]
-            result.append({
+            param_description = {
                 'paramType': param_type,
                 'name': param_name,
-                'description': param_obj.description,
-                'type': param_obj.name,
-                'required': sig_param.default is inspect.Parameter.empty,
-            })
+                'required': sig_param.default is inspect.Parameter.empty}
+            param_description.update(param_obj.describe())
+            result.append(param_description)
         return result
 
     @classmethod

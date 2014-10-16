@@ -10,15 +10,6 @@ from swaggery.keywords import *
 # MODELS
 # #############################################################################
 
-class Operation(Model):
-
-    '''Arithmetic operations.'''
-
-    schema = {
-        'enum': ['add', 'subtract', 'multiply', 'divide'],
-    }
-
-
 class Vector(Model):
 
     '''Vector (2 or 3 dimensional).'''
@@ -67,7 +58,8 @@ class TwoNumbers(Resource):
     def two_numbers(
             cls, request,
             operation: (Ptypes.path,
-                        Operation('One of the 4 arithmetic operations.')),
+                        String('One of the 4 arithmetic operations.',
+                                enum=['add', 'sub', 'mul', 'div'])),
             first: (Ptypes.path,
                     Float('The first operand.')),
             second: (Ptypes.path,
@@ -84,11 +76,11 @@ class TwoNumbers(Resource):
             Respond(400)
         if operation == 'add':
             Respond(200, first + second)
-        elif operation == 'subtract':
+        elif operation == 'sub':
             Respond(200, first - second)
-        elif operation == 'multiply':
+        elif operation == 'mul':
             Respond(200, first * second)
-        elif operation == 'divide':
+        elif operation == 'div':
             if second == 0:
                 Respond(422)
             Respond(200, first / second)
