@@ -1,4 +1,4 @@
-Werkzeug==0.9.6
+Werkzeug==0.15.3
 coverage==3.7.1
 docopt==0.6.2
 jsonschema==2.4.0

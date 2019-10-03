@@ -43,7 +43,7 @@ setup(
     # Dependencies
     install_requires=[
         'uWSGI==2.0.7',
-        'Werkzeug==0.9.6',
+        'Werkzeug==0.15.3',
         'jsonschema==2.4.0',
         'docopt==0.6.2',
     ],
