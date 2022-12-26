@@ -49,7 +49,7 @@ setup(
     ],
     extras_require={
         'dev': [
-            'wheel==0.24.0',
+            'wheel==0.38.1',
             'pip==1.5.6',
             'twine==1.3.1',
         ],
